@@ -2,6 +2,7 @@ package rover.universe;
 
 import rover.Rover;
 import rover.commands.ICommand;
+import rover.directions.IDirection;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -24,8 +25,12 @@ public class Plateau {
         return this.rovers.get(0).getPosition();
     }
 
-    public void addRover(Position position) {
-        rovers.add(new Rover(position));
+    public IDirection getCurrentRoverDirection() {
+        return this.rovers.get(0).getDirection();
+    }
+
+    public void addRover(Position position, IDirection direction) {
+        rovers.add(new Rover(position, direction));
     }
 
     public void executeCommandsOnCurrentRover(List<ICommand> commands) {

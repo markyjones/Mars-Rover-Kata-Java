@@ -4,10 +4,8 @@ import java.awt.*;
 
 public class Position {
     public Point Coordinates;
-    public rover.universe.Orientation Orientation;
 
-    public Position(Point coordinates, Orientation orientation) {
+    public Position(Point coordinates) {
         this.Coordinates = coordinates;
-        this.Orientation = orientation;
     }
 }

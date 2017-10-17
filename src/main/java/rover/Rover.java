@@ -1,13 +1,15 @@
 package rover;
 
-import rover.universe.Orientation;
+import rover.directions.IDirection;
 import rover.universe.Position;
 
 public class Rover {
     private Position position;
+    private IDirection direction;
 
-    public Rover(Position position) {
+    public Rover(Position position, IDirection direction) {
         this.position = position;
+        this.direction = direction;
     }
 
     public Position getPosition() {
@@ -15,57 +17,34 @@ public class Rover {
     }
 
     public void move() {
-        switch (this.position.Orientation) {
-            case NORTH:
+        switch (this.direction.getClass().getName()) {
+            case "rover.directions.North":
                 this.position.Coordinates.y++;
                 break;
-            case EAST:
+            case "rover.directions.East":
                 this.position.Coordinates.x++;
                 break;
-            case SOUTH:
+            case "rover.directions.South":
                 this.position.Coordinates.y--;
                 break;
-            case WEST:
+            case "rover.directions.West":
                 this.position.Coordinates.x--;
                 break;
+            default:
+                System.out.println(this.direction.getClass().getName());
         }
     }
 
     public void rotateLeft() {
-
-        switch (this.position.Orientation) {
-            case NORTH:
-                this.position.Orientation = Orientation.WEST;
-                break;
-            case EAST:
-                this.position.Orientation = Orientation.NORTH;
-                break;
-            case SOUTH:
-                this.position.Orientation = Orientation.EAST;
-                break;
-            case WEST:
-                this.position.Orientation = Orientation.SOUTH;
-                break;
-        }
+        direction = direction.TurnLeft();
     }
 
     public void rotateRight() {
+        direction = direction.TurnRight();
+    }
 
-        switch (this.position.Orientation) {
-            case NORTH:
-                this.position.Orientation = Orientation.EAST;
-                break;
-            case EAST:
-                this.position.Orientation = Orientation.SOUTH;
-                break;
-            case SOUTH:
-                this.position.Orientation = Orientation.WEST;
-                break;
-            case WEST:
-                this.position.Orientation = Orientation.NORTH;
-                break;
-        }
-
+    public IDirection getDirection() {
+        return direction;
     }
 }
 

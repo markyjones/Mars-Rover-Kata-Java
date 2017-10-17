@@ -1,6 +1,8 @@
 import rover.CommandParser;
 import org.junit.jupiter.api.Test;
 import rover.commands.ICommand;
+import rover.directions.East;
+import rover.directions.North;
 import rover.universe.Orientation;
 import rover.universe.Plateau;
 import rover.universe.Position;
@@ -29,20 +31,20 @@ public class PlateauTest {
     public void CanAddRoverWithDefaultPosition() {
         Plateau plateau = new Plateau(DefaultPlateauUpperRightBoundary);
         Position startingPosition = new CommandParser().ParseStartingPosition("1 2 N");
-        plateau.addRover(startingPosition);
+        plateau.addRover(startingPosition, new North());
 
         Position currentPosition =  plateau.getCurrentRoverPosition();
 
         assertEquals(1, currentPosition.Coordinates.x);
         assertEquals(2, currentPosition.Coordinates.y);
-        assertEquals(Orientation.NORTH, currentPosition.Orientation);
+        assertEquals(North.class, plateau.getCurrentRoverDirection().getClass());
     }
 
     @Test
     public void TestCanMoveRoverWithCommandExampleOne(){
         Plateau plateau = new Plateau(DefaultPlateauUpperRightBoundary);
-        Position startingPosition = new Position(new Point(1, 2), Orientation.NORTH);
-        plateau.addRover(startingPosition);
+        Position startingPosition = new Position(new Point(1, 2));
+        plateau.addRover(startingPosition, new North());
 
         List<ICommand> commands = new CommandParser().ParseCommands("LMLMLMLMM");
         plateau.executeCommandsOnCurrentRover(commands);
@@ -50,14 +52,14 @@ public class PlateauTest {
         Position currentPosition =  plateau.getCurrentRoverPosition();
         assertEquals(1, currentPosition.Coordinates.x);
         assertEquals(3, currentPosition.Coordinates.y);
-        assertEquals(Orientation.NORTH, currentPosition.Orientation);
+        assertEquals(North.class, plateau.getCurrentRoverDirection().getClass());
     }
 
     @Test
     public void TestCanMoveRoverWithCommandExampleTwo(){
         Plateau plateau = new Plateau(DefaultPlateauUpperRightBoundary);
-        Position startingPosition = new Position(new Point(3, 3), Orientation.EAST);
-        plateau.addRover(startingPosition);
+        Position startingPosition = new Position(new Point(3, 3));
+        plateau.addRover(startingPosition, new East());
 
         List<ICommand> commands = new CommandParser().ParseCommands("MMRMMRMRRM");
         plateau.executeCommandsOnCurrentRover(commands);
@@ -65,7 +67,7 @@ public class PlateauTest {
         Position currentPosition =  plateau.getCurrentRoverPosition();
         assertEquals(5, currentPosition.Coordinates.x);
         assertEquals(1, currentPosition.Coordinates.y);
-        assertEquals(Orientation.EAST, currentPosition.Orientation);
+        assertEquals(East.class, plateau.getCurrentRoverDirection().getClass());
     }
 
 }

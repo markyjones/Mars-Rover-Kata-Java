@@ -36,10 +36,10 @@ public class CommandParser {
         }
 
         String direction = splitCommand[2];
-        if(direction.equalsIgnoreCase("N")) return new Position(parseCoordinates(command), Orientation.NORTH);
-        if(direction.equalsIgnoreCase("S")) return new Position(parseCoordinates(command), Orientation.SOUTH);
-        if(direction.equalsIgnoreCase("E")) return new Position(parseCoordinates(command), Orientation.EAST);
-        if(direction.equalsIgnoreCase("W")) return new Position(parseCoordinates(command), Orientation.WEST);
+        if(direction.equalsIgnoreCase("N")) return new Position(parseCoordinates(command));
+        if(direction.equalsIgnoreCase("S")) return new Position(parseCoordinates(command));
+        if(direction.equalsIgnoreCase("E")) return new Position(parseCoordinates(command));
+        if(direction.equalsIgnoreCase("W")) return new Position(parseCoordinates(command));
 
         throw new IllegalArgumentException(String.format("Expected N S E W as possible orientations but got {0}", direction));
     }
