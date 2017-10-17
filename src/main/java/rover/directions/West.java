@@ -1,5 +1,7 @@
 package rover.directions;
 
+import java.awt.*;
+
 public class West implements IDirection {
     @Override
     public IDirection TurnLeft() {
@@ -9,6 +11,12 @@ public class West implements IDirection {
     @Override
     public IDirection TurnRight() {
         return new North();
+    }
+
+    @Override
+    public Point updateLocation(Point point) {
+        point.x--;
+        return point;
     }
 
     @Override

@@ -17,20 +17,7 @@ public class Rover {
     }
 
     public void move() {
-        switch (this.direction.toString()) {
-            case "N":
-                this.position.Coordinates.y++;
-                break;
-            case "E":
-                this.position.Coordinates.x++;
-                break;
-            case "S":
-                this.position.Coordinates.y--;
-                break;
-            case "W":
-                this.position.Coordinates.x--;
-                break;
-        }
+        position.Coordinates = direction.updateLocation(position.Coordinates);
     }
 
     public void rotateLeft() {
