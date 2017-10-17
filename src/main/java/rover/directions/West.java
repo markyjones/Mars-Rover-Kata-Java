@@ -10,4 +10,9 @@ public class West implements IDirection {
     public IDirection TurnRight() {
         return new North();
     }
+
+    @Override
+    public String toString() {
+        return "W";
+    }
 }

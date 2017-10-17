@@ -1,7 +1,6 @@
 package rover;
 
 import rover.commands.*;
-import rover.universe.Orientation;
 import rover.universe.Position;
 
 import java.awt.*;

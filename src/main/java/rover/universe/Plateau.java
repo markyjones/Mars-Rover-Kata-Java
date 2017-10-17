@@ -21,12 +21,8 @@ public class Plateau {
         return upperRight;
     }
 
-    public Position getCurrentRoverPosition() {
-        return this.rovers.get(0).getPosition();
-    }
-
-    public IDirection getCurrentRoverDirection() {
-        return this.rovers.get(0).getDirection();
+    public String getCurrentRoverPosition() {
+        return this.rovers.get(0).getLocation();
     }
 
     public void addRover(Position position, IDirection direction) {

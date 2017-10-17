@@ -12,26 +12,24 @@ public class Rover {
         this.direction = direction;
     }
 
-    public Position getPosition() {
-        return position;
+    public String getLocation() {
+        return String.format("%s %s %s", position.Coordinates.x, position.Coordinates.y, direction.toString());
     }
 
     public void move() {
-        switch (this.direction.getClass().getName()) {
-            case "rover.directions.North":
+        switch (this.direction.toString()) {
+            case "N":
                 this.position.Coordinates.y++;
                 break;
-            case "rover.directions.East":
+            case "E":
                 this.position.Coordinates.x++;
                 break;
-            case "rover.directions.South":
+            case "S":
                 this.position.Coordinates.y--;
                 break;
-            case "rover.directions.West":
+            case "W":
                 this.position.Coordinates.x--;
                 break;
-            default:
-                System.out.println(this.direction.getClass().getName());
         }
     }
 
@@ -41,10 +39,6 @@ public class Rover {
 
     public void rotateRight() {
         direction = direction.TurnRight();
-    }
-
-    public IDirection getDirection() {
-        return direction;
     }
 }
 
