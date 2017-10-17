@@ -25,8 +25,8 @@ public class Plateau {
         return this.rovers.get(0).getLocation();
     }
 
-    public void addRover(Position position, IDirection direction) {
-        rovers.add(new Rover(position, direction));
+    public void addRover(Point coordinates, IDirection direction) {
+        rovers.add(new Rover(coordinates, direction));
     }
 
     public void executeCommandsOnCurrentRover(List<ICommand> commands) {

@@ -4,7 +4,6 @@ import rover.commands.ICommand;
 import rover.directions.East;
 import rover.directions.North;
 import rover.universe.Plateau;
-import rover.universe.Position;
 
 import java.awt.*;
 import java.util.List;
@@ -29,7 +28,7 @@ public class PlateauTest {
     @Test
     public void CanAddRoverWithDefaultPosition() {
         Plateau plateau = new Plateau(DefaultPlateauUpperRightBoundary);
-        Position startingPosition = new CommandParser().ParseStartingPosition("1 2 N");
+        Point startingPosition = new CommandParser().ParseStartingPosition("1 2 N");
         plateau.addRover(startingPosition, new North());
 
         assertEquals("1 2 N", plateau.getCurrentRoverPosition());
@@ -38,7 +37,7 @@ public class PlateauTest {
     @Test
     public void TestCanMoveRoverWithCommandExampleOne(){
         Plateau plateau = new Plateau(DefaultPlateauUpperRightBoundary);
-        Position startingPosition = new Position(new Point(1, 2));
+        Point startingPosition = new Point(1, 2);
         plateau.addRover(startingPosition, new North());
 
         List<ICommand> commands = new CommandParser().ParseCommands("LMLMLMLMM");
@@ -51,7 +50,7 @@ public class PlateauTest {
     @Test
     public void TestCanMoveRoverWithCommandExampleTwo(){
         Plateau plateau = new Plateau(DefaultPlateauUpperRightBoundary);
-        Position startingPosition = new Position(new Point(3, 3));
+        Point startingPosition = new Point(3, 3);
         plateau.addRover(startingPosition, new East());
 
         List<ICommand> commands = new CommandParser().ParseCommands("MMRMMRMRRM");

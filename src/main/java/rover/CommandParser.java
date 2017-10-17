@@ -1,7 +1,6 @@
 package rover;
 
 import rover.commands.*;
-import rover.universe.Position;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,21 +25,15 @@ public class CommandParser {
         return parseCoordinates(command);
     }
 
-    public Position ParseStartingPosition(String command) {
+    public Point ParseStartingPosition(String command) {
         CheckFullNullOrEmpty(command);
 
         String[] splitCommand = command.split(" ");
         if (splitCommand.length != 3) {
             throw new IllegalArgumentException("Expected format space delimited format e.g. 'x y D' ");
         }
-
-        String direction = splitCommand[2];
-        if(direction.equalsIgnoreCase("N")) return new Position(parseCoordinates(command));
-        if(direction.equalsIgnoreCase("S")) return new Position(parseCoordinates(command));
-        if(direction.equalsIgnoreCase("E")) return new Position(parseCoordinates(command));
-        if(direction.equalsIgnoreCase("W")) return new Position(parseCoordinates(command));
-
-        throw new IllegalArgumentException(String.format("Expected N S E W as possible orientations but got {0}", direction));
+        ///TODO do some parsing for the direction perhaps
+        return parseCoordinates(command);
     }
 
     public List<ICommand> ParseCommands(String commands) {

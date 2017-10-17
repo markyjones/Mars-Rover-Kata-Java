@@ -1,23 +1,24 @@
 package rover;
 
 import rover.directions.IDirection;
-import rover.universe.Position;
+
+import java.awt.*;
 
 public class Rover {
-    private Position position;
+    private Point coordinates;
     private IDirection direction;
 
-    public Rover(Position position, IDirection direction) {
-        this.position = position;
+    public Rover(Point coordinates, IDirection direction) {
+        this.coordinates = coordinates;
         this.direction = direction;
     }
 
     public String getLocation() {
-        return String.format("%s %s %s", position.Coordinates.x, position.Coordinates.y, direction.toString());
+        return String.format("%s %s %s", coordinates.x, coordinates.y, direction.toString());
     }
 
     public void move() {
-        position.Coordinates = direction.updateLocation(position.Coordinates);
+        coordinates = direction.updateLocation(coordinates);
     }
 
     public void rotateLeft() {
