@@ -1,3 +1,9 @@
+package rover;
+
+import rover.commands.CommandEnum;
+import rover.universe.Orientation;
+import rover.universe.Position;
+
 public class Rover {
     private Position position;
 
@@ -26,7 +32,7 @@ public class Rover {
         }
     }
 
-    public void rotate(Command command) {
+    public void rotate(CommandEnum command) {
         switch (command){
             case L:
                 switch (this.position.Orientation){
@@ -61,7 +67,7 @@ public class Rover {
                 }
                 break;
             default:
-                throw new IllegalArgumentException(String.format("Unknown rotation command {0}", command));
+                throw new IllegalArgumentException(String.format("Unknown rotation command {0}", command.toString()));
         }
     }
 }

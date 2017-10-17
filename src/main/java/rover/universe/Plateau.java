@@ -1,3 +1,9 @@
+package rover.universe;
+
+import rover.commands.CommandEnum;
+import rover.Rover;
+import rover.commands.ICommand;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,18 +29,7 @@ public class Plateau {
         rovers.add(new Rover(position));
     }
 
-    public void moveCurrentRover(Command[] commands) {
-        for (Command command : commands) {
-            switch (command) {
-                case M:
-                    System.out.println(String.format("Moving"));
-                    this.rovers.get(0).move();
-                    break;
-                default:
-                    System.out.println(String.format("Rotating " + command));
-                    this.rovers.get(0).rotate(command);
-                    break;
-            }
-        }
+    public void executeCommandsOnCurrentRover(List<ICommand> commands) {
+        commands.forEach(command -> command.Execute(rovers.get(0)));
     }
 }

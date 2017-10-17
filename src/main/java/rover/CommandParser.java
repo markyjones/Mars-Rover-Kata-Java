@@ -1,8 +1,27 @@
+package rover;
+
+import rover.commands.*;
+import rover.universe.Orientation;
+import rover.universe.Position;
+
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 public class CommandParser {
+
+    private final Map<Character, ICommand> availableCommands = new HashMap<>();
+
+    public CommandParser(){
+        availableCommands.put('L', new TurnLeftCommand());
+        availableCommands.put('R', new TurnRightCommand());
+        availableCommands.put('M', new MoveCommand());
+
+    }
+
     public Point ParseUpperRight(String command) {
         CheckFullNullOrEmpty(command);
         return parseCoordinates(command);
@@ -25,15 +44,14 @@ public class CommandParser {
         throw new IllegalArgumentException(String.format("Expected N S E W as possible orientations but got {0}", direction));
     }
 
-    public Command[] ParseCommands(String commands) {
+    public List<ICommand> ParseCommands(String commands) {
         CheckFullNullOrEmpty(commands);
 
-        List<Command> commandsToProcess = new ArrayList<>();
+        List<ICommand> commandsToProcess = new ArrayList<>();
         commands.chars().forEach(
-                command -> commandsToProcess
-                        .add(Command.valueOf(String.valueOf(Character.toChars(command)))) );
+                command -> commandsToProcess.add(availableCommands.get((char)command)));
 
-        return commandsToProcess.toArray(new Command[0]);
+        return commandsToProcess;
     }
 
     private void CheckFullNullOrEmpty(String command) {
