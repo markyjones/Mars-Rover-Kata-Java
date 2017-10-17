@@ -5,6 +5,6 @@ import rover.Rover;
 public class TurnLeftCommand implements ICommand {
     @Override
     public void Execute(Rover rover) {
-        rover.rotate(CommandEnum.L);
+        rover.rotateLeft();
     }
 }

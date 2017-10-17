@@ -1,6 +1,5 @@
 package rover.universe;
 
-import rover.commands.CommandEnum;
 import rover.Rover;
 import rover.commands.ICommand;
 

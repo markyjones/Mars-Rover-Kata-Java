@@ -1,6 +1,5 @@
 package rover;
 
-import rover.commands.CommandEnum;
 import rover.universe.Orientation;
 import rover.universe.Position;
 
@@ -16,7 +15,7 @@ public class Rover {
     }
 
     public void move() {
-        switch (this.position.Orientation){
+        switch (this.position.Orientation) {
             case NORTH:
                 this.position.Coordinates.y++;
                 break;
@@ -32,42 +31,41 @@ public class Rover {
         }
     }
 
-    public void rotate(CommandEnum command) {
-        switch (command){
-            case L:
-                switch (this.position.Orientation){
-                    case NORTH:
-                        this.position.Orientation = Orientation.WEST;
-                        break;
-                    case EAST:
-                        this.position.Orientation = Orientation.NORTH;
-                        break;
-                    case SOUTH:
-                        this.position.Orientation = Orientation.EAST;
-                        break;
-                    case WEST:
-                        this.position.Orientation = Orientation.SOUTH;
-                        break;
-                }
+    public void rotateLeft() {
+
+        switch (this.position.Orientation) {
+            case NORTH:
+                this.position.Orientation = Orientation.WEST;
                 break;
-            case R:
-                switch (this.position.Orientation){
-                    case NORTH:
-                        this.position.Orientation = Orientation.EAST;
-                        break;
-                    case EAST:
-                        this.position.Orientation = Orientation.SOUTH;
-                        break;
-                    case SOUTH:
-                        this.position.Orientation = Orientation.WEST;
-                        break;
-                    case WEST:
-                        this.position.Orientation = Orientation.NORTH;
-                        break;
-                }
+            case EAST:
+                this.position.Orientation = Orientation.NORTH;
                 break;
-            default:
-                throw new IllegalArgumentException(String.format("Unknown rotation command {0}", command.toString()));
+            case SOUTH:
+                this.position.Orientation = Orientation.EAST;
+                break;
+            case WEST:
+                this.position.Orientation = Orientation.SOUTH;
+                break;
         }
     }
+
+    public void rotateRight() {
+
+        switch (this.position.Orientation) {
+            case NORTH:
+                this.position.Orientation = Orientation.EAST;
+                break;
+            case EAST:
+                this.position.Orientation = Orientation.SOUTH;
+                break;
+            case SOUTH:
+                this.position.Orientation = Orientation.WEST;
+                break;
+            case WEST:
+                this.position.Orientation = Orientation.NORTH;
+                break;
+        }
+
+    }
 }
+
