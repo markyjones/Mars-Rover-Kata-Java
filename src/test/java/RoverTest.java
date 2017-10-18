@@ -12,22 +12,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class PlateauTest {
+public class RoverTest {
 
-    @Test
-    public void CanCreatePlateauWithDefaultDimension() {
-        Point upperRightBoundary = new CommandParser().ParseUpperRight("5 5");
-
-        Plateau plateau = new Plateau(upperRightBoundary);
-
-        assertEquals(5, plateau.getUpperRight().x);
-        assertEquals(5, plateau.getUpperRight().y);
-    }
+    private final Plateau FiveByFivePlateau = new Plateau(new Point(5,5));
 
     @Test
     public void CanAddRoverWithDefaultPosition() {
         Point startingPosition = new CommandParser().ParseStartingPosition("1 2 N");
-        Rover rover = new Rover(startingPosition, new North());
+        Rover rover = new Rover(startingPosition, new North(), null);
 
         assertEquals("1 2 N", rover.reportLocation());
     }
@@ -35,7 +27,7 @@ public class PlateauTest {
     @Test
     public void TestCanMoveRoverWithCommandExampleOne(){
         Point startingPosition = new Point(1, 2);
-        Rover rover = new Rover(startingPosition, new North());
+        Rover rover = new Rover(startingPosition, new North(), FiveByFivePlateau);
 
         List<ICommand> commands = new CommandParser().ParseCommands("LMLMLMLMM");
         rover.executeCommands(commands);
@@ -46,9 +38,20 @@ public class PlateauTest {
     @Test
     public void TestCanMoveRoverWithCommandExampleTwo(){
         Point startingPosition = new Point(3, 3);
-        Rover rover = new Rover(startingPosition, new East());
+        Rover rover = new Rover(startingPosition, new East(), FiveByFivePlateau);
 
         List<ICommand> commands = new CommandParser().ParseCommands("MMRMMRMRRM");
+        rover.executeCommands(commands);
+
+        assertEquals("5 1 E", rover.reportLocation());
+    }
+
+    @Test
+    public void TestCanMoveRoverWithCommandExampleBeyondBoundary(){
+        Point startingPosition = new Point(3, 3);
+        Rover rover = new Rover(startingPosition, new East(), FiveByFivePlateau);
+
+        List<ICommand> commands = new CommandParser().ParseCommands("MMRMMRMRRMM");
         rover.executeCommands(commands);
 
         assertEquals("5 1 E", rover.reportLocation());

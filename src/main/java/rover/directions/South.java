@@ -15,8 +15,7 @@ public class South implements IDirection {
 
     @Override
     public Point applyModifier(Point point) {
-        point.y--;
-        return point;
+        return new Point(point.x, point.y - 1);
     }
 
     @Override

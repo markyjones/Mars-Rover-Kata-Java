@@ -15,8 +15,7 @@ public class West implements IDirection {
 
     @Override
     public Point applyModifier(Point point) {
-        point.x--;
-        return point;
+        return new Point(point.x - 1, point.y);
     }
 
     @Override

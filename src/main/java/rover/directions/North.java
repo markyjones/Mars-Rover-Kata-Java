@@ -14,9 +14,8 @@ public class North implements IDirection {
     }
 
     @Override
-    public Point applyModifier(Point point) {
-        point.y++;
-        return point;
+    public Point applyModifier( Point point) {
+        return new Point(point.x, point.y + 1);
     }
 
     @Override

@@ -2,6 +2,7 @@ package rover;
 
 import rover.commands.ICommand;
 import rover.directions.IDirection;
+import rover.universe.Plateau;
 
 import java.awt.*;
 import java.util.List;
@@ -9,10 +10,12 @@ import java.util.List;
 public class Rover {
     private Point coordinates;
     private IDirection direction;
+    private Plateau plateau;
 
-    public Rover(Point coordinates, IDirection direction) {
+    public Rover(Point coordinates, IDirection direction, Plateau plateau) {
         this.coordinates = coordinates;
         this.direction = direction;
+        this.plateau = plateau;
     }
 
     public String reportLocation() {
@@ -20,7 +23,12 @@ public class Rover {
     }
 
     public void move() {
-        coordinates = direction.applyModifier(coordinates);
+        Point proposedMove = direction.applyModifier(coordinates);
+        if(plateau.isLocationWithinPlateau(proposedMove)) {
+            coordinates = proposedMove;
+        }else {
+            System.out.println("Hit boundary");
+        }
     }
 
     public void rotateLeft() {
