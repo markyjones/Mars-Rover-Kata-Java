@@ -5,5 +5,5 @@ import java.awt.*;
 public interface IDirection {
     IDirection TurnLeft();
     IDirection TurnRight();
-    Point updateLocation(Point point);
+    Point applyModifier(Point point);
 }

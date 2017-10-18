@@ -1,5 +1,6 @@
 import rover.CommandParser;
 import org.junit.jupiter.api.Test;
+import rover.Rover;
 import rover.commands.ICommand;
 import rover.directions.East;
 import rover.directions.North;
@@ -13,8 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlateauTest {
 
-    final private Point DefaultPlateauUpperRightBoundary = new Point(5,5);
-
     @Test
     public void CanCreatePlateauWithDefaultDimension() {
         Point upperRightBoundary = new CommandParser().ParseUpperRight("5 5");
@@ -27,37 +26,32 @@ public class PlateauTest {
 
     @Test
     public void CanAddRoverWithDefaultPosition() {
-        Plateau plateau = new Plateau(DefaultPlateauUpperRightBoundary);
         Point startingPosition = new CommandParser().ParseStartingPosition("1 2 N");
-        plateau.addRover(startingPosition, new North());
+        Rover rover = new Rover(startingPosition, new North());
 
-        assertEquals("1 2 N", plateau.getCurrentRoverPosition());
+        assertEquals("1 2 N", rover.reportLocation());
     }
 
     @Test
     public void TestCanMoveRoverWithCommandExampleOne(){
-        Plateau plateau = new Plateau(DefaultPlateauUpperRightBoundary);
         Point startingPosition = new Point(1, 2);
-        plateau.addRover(startingPosition, new North());
+        Rover rover = new Rover(startingPosition, new North());
 
         List<ICommand> commands = new CommandParser().ParseCommands("LMLMLMLMM");
-        plateau.executeCommandsOnCurrentRover(commands);
+        rover.executeCommands(commands);
 
-        assertEquals("1 3 N", plateau.getCurrentRoverPosition());
-
+        assertEquals("1 3 N", rover.reportLocation());
     }
 
     @Test
     public void TestCanMoveRoverWithCommandExampleTwo(){
-        Plateau plateau = new Plateau(DefaultPlateauUpperRightBoundary);
         Point startingPosition = new Point(3, 3);
-        plateau.addRover(startingPosition, new East());
+        Rover rover = new Rover(startingPosition, new East());
 
         List<ICommand> commands = new CommandParser().ParseCommands("MMRMMRMRRM");
-        plateau.executeCommandsOnCurrentRover(commands);
+        rover.executeCommands(commands);
 
-        assertEquals("5 1 E", plateau.getCurrentRoverPosition());
-
+        assertEquals("5 1 E", rover.reportLocation());
     }
 
 }
